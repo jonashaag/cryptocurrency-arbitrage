@@ -86,6 +86,7 @@ function computePrices(data) {
                 }
                 arr.sort(function (a, b) {
                     return a[0] - b[0];
+                  //return a.spread - b.spread;
                 });
                 for (let i = 0; i < arr.length; i++) {
                     for (let j = i + 1; j < arr.length; j++) {
@@ -118,6 +119,19 @@ function computePrices(data) {
     }
 }
 
+function bla() {
+	const crypto = require('crypto');
+const hmac = crypto.createHmac('sha256', 'a secret');
+
+hmac.on('readable', () => {
+  const data = hmac.read();
+  if (data) {
+    console.log(data.toString('hex'));
+    // Prints:
+    //   7fd04df92f636fd450bc841c9418e5825c17f33ad9c87c518115a45971f7f77e
+  }
+});
+}
 
 (async function main() {
     let arrayOfRequests = [];
@@ -125,7 +139,9 @@ function computePrices(data) {
     for (let i = 0; i < markets.length; i++) {
         arrayOfRequests.push(getMarketData(markets[i], coin_prices));
     }
-
+	
+	
+	
     await Promise.all(arrayOfRequests.map(p => p.catch(e => e)))
 
         .then(results => computePrices(coin_prices))
