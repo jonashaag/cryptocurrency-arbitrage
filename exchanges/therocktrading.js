@@ -14,6 +14,9 @@ module.exports = (function() {
                         if(coin.fund_id.includes('BTC')) {
                             let coinName = coin.fund_id.replace('BTC','').toUpperCase();
                             let price = coin['last'];
+                            if (coin.fund_id.substr(0,3) == 'BTC') {
+                              price = 1/price;
+                            }
 
                             if (!coin_prices[coinName]) coin_prices[coinName] = {};
 
